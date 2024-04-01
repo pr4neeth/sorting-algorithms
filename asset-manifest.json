@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/pr4neeth.github.io/sorting-algorithms/static/css/main.1a7488ce.css",
-    "main.js": "/pr4neeth.github.io/sorting-algorithms/static/js/main.1738a9d9.js",
-    "index.html": "/pr4neeth.github.io/sorting-algorithms/index.html",
-    "main.1a7488ce.css.map": "/pr4neeth.github.io/sorting-algorithms/static/css/main.1a7488ce.css.map",
-    "main.1738a9d9.js.map": "/pr4neeth.github.io/sorting-algorithms/static/js/main.1738a9d9.js.map"
+    "main.css": "/sorting-algorithms/static/css/main.1a7488ce.css",
+    "main.js": "/sorting-algorithms/static/js/main.1738a9d9.js",
+    "index.html": "/sorting-algorithms/index.html",
+    "main.1a7488ce.css.map": "/sorting-algorithms/static/css/main.1a7488ce.css.map",
+    "main.1738a9d9.js.map": "/sorting-algorithms/static/js/main.1738a9d9.js.map"
   },
   "entrypoints": [
     "static/css/main.1a7488ce.css",
