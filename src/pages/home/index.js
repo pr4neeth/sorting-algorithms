@@ -73,7 +73,10 @@ const Home = () => {
           threeWayQuickSort(list);
           break;
         case 7:
-          setList(mergeSort(list));
+          setList(mergeSort(list).sortedList);
+          break;
+        default:
+          bubbleSort(list);
       }
       setIsSorted(true);
     }
@@ -94,6 +97,10 @@ const Home = () => {
     return (
       <Container className="Home-header">
         <div>
+          <div style={{justifyContent:'center',display:'flex'}}>
+            <h1>Select single algorithm to sort the array</h1>
+          </div>
+          <br />
           <Row>
             <Col>Give the array size</Col>
             <Col>
@@ -144,6 +151,7 @@ const Home = () => {
         <BarChart
           series = {[{data: list}]} 
         />
+
       </Container>
     )
 }

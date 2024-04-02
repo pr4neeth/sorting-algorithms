@@ -1,7 +1,11 @@
 import swap from "../helpers/swap";
 
 const threeWayQuickSort = (list) => {
+    const start = performance.now();
     sort(list, 0, list.length - 1);
+    const end = performance.now();
+
+    return end - start;
 }
 
 const sort = (list, left , right) => {

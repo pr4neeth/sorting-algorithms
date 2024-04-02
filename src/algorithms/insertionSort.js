@@ -2,6 +2,8 @@ const insertionSort = (list) => {
 
     const len = list.length;
 
+    const start = performance.now();
+
     let curr;
     let i,j;
     
@@ -16,6 +18,10 @@ const insertionSort = (list) => {
 
         list[j+1] = curr;
     }
+
+    const end = performance.now();
+
+    return end - start;
     
 }
 

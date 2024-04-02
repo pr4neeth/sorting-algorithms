@@ -2,7 +2,7 @@ import swap from "../helpers/swap";
 
 const bubbleSort = (list) => {
 
-    const start = new Date().getTime();
+    const start = performance.now();
 
     const len = list.length;
 
@@ -11,7 +11,6 @@ const bubbleSort = (list) => {
     
     for(i = len-1; i>1 ; i--)
     {
-        swapped = false;
 
         for(j = len-1; j > len-1-i; j--)
         {
@@ -27,7 +26,7 @@ const bubbleSort = (list) => {
         }
     }
 
-    const end = new Date().getTime();
+    const end = performance.now();
 
     return end-start;
     

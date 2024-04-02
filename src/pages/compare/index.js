@@ -12,15 +12,21 @@ import quickSort from '../../algorithms/quickSort';
 import threeWayQuickSort from '../../algorithms/threeWayQuickSort';
 
 import { Container, Col, Row } from 'react-bootstrap';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { BarChart, BarPlot } from '@mui/x-charts/BarChart';
 import { Button, TextField } from '@mui/material';
 import Select from 'react-select';
+import { ChartsYAxis, ResponsiveChartContainer } from '@mui/x-charts';
+import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
+import sortedArray from '../../helpers/sortedArray';
+import reverseSortedArray from '../../helpers/reverseSortedArray';
+import almostSortedArray from '../../helpers/almostSortedArray';
 
 const Compare = () => {
     const [list, setList] = useState([]);
     const [isSorted, setIsSorted] = useState(false);
-    const [algo, setAlgo] = useState(1);
+    const [algo, setAlgo] = useState([]);
     const [size, setSize] = useState(200);
+    const [arrayType, setArrayType] = useState(1);
   
     const algorithms = [
       {value: 1, label: 'Bubble Sort'},
@@ -31,6 +37,16 @@ const Compare = () => {
       {value: 6, label: '3 Median Quick Sort'},
       {value: 7, label: 'Merge Sort'}
     ]
+
+    const arrayOptions = [
+      {value: 1, label: 'Random'},
+      {value: 2, label: 'Sorted'},
+      {value: 3, label: 'Sorted in reverse'},
+      {value: 4, label: 'Almost Sorted'}
+    ]
+
+    const [timeMap, setTimeMap] = useState([]);
+    const [labelMap, setLabelMap] = useState([]);
   
     const colourStyles = {
       control: styles => ({ ...styles, fontSize: '15px', color: '#000' }),
@@ -47,53 +63,96 @@ const Compare = () => {
     useEffect(() => {
   
       setList(randomArray());
+      setAlgo([])
+      setLabelMap([])
+      setIsSorted(false);
       
     }, [])
   
     const sort = () => {
       if(isSorted)
         return;
-      switch(algo) {
-        case 1:
-          bubbleSort(list);
-          break;
-        case 2:
-          insertionSort(list);
-          break;
-        case 3:
-          selectionSort(list);
-          break;
-        case 4:
-          heapSort(list);
-          break;
-        case 5:
-          quickSort(list);
-          break;
-        case 6:
-          threeWayQuickSort(list);
-          break;
-        case 7:
-          setList(mergeSort(list));
-      }
+      algo.map((element) =>{
+        let temp = list.slice();
+        console.log(temp)
+        switch(element.value) {
+          case 1:
+            timeMap.push(bubbleSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 2:
+            timeMap.push(insertionSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 3:
+            timeMap.push(selectionSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 4:
+            timeMap.push(heapSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 5:
+            timeMap.push(quickSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 6:
+            timeMap.push(threeWayQuickSort(temp));
+            labelMap.push(element.label);
+            break;
+          case 7:
+            timeMap.push(mergeSort(temp).time);
+            labelMap.push(element.label);
+            break;
+          default:
+            bubbleSort(list);
+        }
+      })
+      
+      console.log(timeMap);
+      threeWayQuickSort(list);
       setIsSorted(true);
     }
   
     const regenerate = () => {
-      setList(randomArray(size));
+      switch(arrayType) {
+        case 1:
+          setList(randomArray(size))
+          break;
+        case 2:
+          setList(sortedArray(size))
+          break;
+        case 3:
+          setList(reverseSortedArray(size))
+          break;
+        case 4:
+          setList(almostSortedArray(size))
+          break;
+        default:
+          setList(randomArray(size))
+      }
+      setTimeMap([]);
+      setLabelMap([]);
       setIsSorted(false);
     }
   
     const handleAlgoChange = (event) => {
-      setAlgo(event.value);
+      setAlgo(event);
     } 
     const handleSizeChange = (event) => {
-      console.log(event);
       setSize(event.target.value)
+    }
+    const handleArrayChange = (event) => {
+      setArrayType(event.value);
     }
 
     return (
       <Container className="Home-header">
         <div>
+          <div style={{display:'flex', justifyContent: 'center'}}>
+            <h1>Select two or more Algorithms to compare the run time</h1>
+          </div>
+          <br/>
           <Row>
             <Col>Give the array size</Col>
             <Col>
@@ -111,6 +170,14 @@ const Compare = () => {
               />
             </Col>
             <Col>
+              <Select 
+                options = {arrayOptions}
+                onChange={handleArrayChange}
+                placeholder = {'Select type of Array'}
+                styles={colourStyles}
+              />
+            </Col>
+            <Col>
               <Button
                 variant='outlined'
                 onClick = {regenerate}
@@ -121,7 +188,7 @@ const Compare = () => {
           </Row>
           <br/>
           <Row>
-            <Col>Select the sorting Algorithm</Col>
+            <Col>Select the sorting Algorithms to compare run time</Col>
             <Col>
               <Select 
                 options = {algorithms}
@@ -136,12 +203,23 @@ const Compare = () => {
                 variant='outlined'
                 onClick={sort}
               >
-                Sort the array
+                Sort and Compare
               </Button>
             </Col>
           </Row>
         </div>
-        
+
+        {isSorted && <ResponsiveChartContainer 
+          xAxis={[{scaleType: 'band',data: labelMap, id:'x-axis-id' }]}
+          yAxis={[{data: timeMap, id:'y-axis-id'}]}
+          series = {[{type:'bar',data: timeMap}]}
+          height={300}
+        >
+          <BarPlot />
+          <ChartsXAxis label="Algorithms" position="bottom" axisId="x-axis-id" />
+          <ChartsYAxis label="Run Time" axisId="y-axis-id" />
+        </ResponsiveChartContainer>}
+
         <BarChart
           series = {[{data: list}]} 
         />

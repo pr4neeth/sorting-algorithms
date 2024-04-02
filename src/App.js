@@ -15,12 +15,14 @@ function App() {
   return (
     <>
       <br/>
-      <Button
-        variant="outlined"
-        onClick={handleClick}
-      >
-        {isSingle ? <>Compare 2 or more algo</> : <>Visualise single Algo</>} 
-      </Button>
+      <div style={{justifyContent:'right', display:'flex'}}>
+        <Button
+          variant="outlined"
+          onClick={handleClick}
+        >
+          {isSingle ? <>Compare run time</> : <>Visualise single algorithm</>} 
+        </Button>
+      </div>
 
       {isSingle? <Home/> : <Compare />}
     </>

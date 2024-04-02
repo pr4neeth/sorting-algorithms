@@ -24,7 +24,20 @@ const merge = (a, b) => {
 }
 
 const mergeSort = (list) => {
+
+    const start = performance.now();
+
+    const result = sort(list);
+
+    const end = performance.now();
+
+    return {
+        time: end - start,
+        sortedList: result
+    }
     
+}
+const sort = (list) => {
     const len = list.length;
     if(len === 1)
     {
@@ -33,10 +46,9 @@ const mergeSort = (list) => {
     let l1 = list.slice(0,len/2);
     let l2 = list.slice(len/2);
 
-    l1 = mergeSort(l1);
-    l2 = mergeSort(l2);
+    l1 = sort(l1);
+    l2 = sort(l2);
 
     return merge(l1, l2);
 }
-
 export default mergeSort;

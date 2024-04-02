@@ -4,6 +4,8 @@ const selectionSort = (list) => {
 
     const len = list.length;
 
+    const start = performance.now();
+
     let i,j,min;
     
     for(i = 0; i<len ; i++)
@@ -22,6 +24,10 @@ const selectionSort = (list) => {
             swap(list, i, min);
         }
     }
+
+    const end = performance.now();
+
+    return end - start;
 
 }
 

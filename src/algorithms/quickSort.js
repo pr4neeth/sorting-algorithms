@@ -1,9 +1,9 @@
 import swap from "../helpers/swap";
 
 const quickSort = (list) => {
-    const start = new Date().getTime();
+    const start = performance.now();
     sort(list, 0 , list.length - 1);
-    const end = new Date().getTime();
+    const end = performance.now();
 
     return end-start;
 }

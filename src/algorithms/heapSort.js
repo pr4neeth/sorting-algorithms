@@ -3,6 +3,8 @@ import swap from "../helpers/swap";
 const heapSort = (list) => {
     const len = list.length;
 
+    const start = performance.now();
+
     for (let i = Math.floor(len / 2) - 1; i >= 0; i--)
         heapify(list, len, i);
 
@@ -11,6 +13,10 @@ const heapSort = (list) => {
 
         heapify(list, i, 0);
     }
+
+    const end = performance.now();
+
+    return end - start;
 }
 
 const heapify = (list, len, i) => {
