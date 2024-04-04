@@ -20,6 +20,7 @@ import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import sortedArray from '../../helpers/sortedArray';
 import reverseSortedArray from '../../helpers/reverseSortedArray';
 import almostSortedArray from '../../helpers/almostSortedArray';
+import { Bar } from 'react-chartjs-2';
 
 const Compare = () => {
     const [list, setList] = useState([]);
@@ -70,46 +71,50 @@ const Compare = () => {
     }, [])
   
     const sort = () => {
-      if(isSorted)
+      if(algo.length === 0)
+      {
+        alert("Select one or more algorithms")
         return;
+      }
+      if(isSorted)
+      { 
+        alert("The Array is already sorted")
+        return;
+      }
       algo.map((element) =>{
         let temp = list.slice();
+        let runTime = 0;
         console.log(temp)
         switch(element.value) {
           case 1:
-            timeMap.push(bubbleSort(temp));
-            labelMap.push(element.label);
+            runTime = bubbleSort(temp);
             break;
           case 2:
-            timeMap.push(insertionSort(temp));
-            labelMap.push(element.label);
+            runTime = insertionSort(temp);
             break;
           case 3:
-            timeMap.push(selectionSort(temp));
-            labelMap.push(element.label);
+            runTime = selectionSort(temp)
             break;
           case 4:
-            timeMap.push(heapSort(temp));
-            labelMap.push(element.label);
+            runTime = heapSort(temp)
             break;
           case 5:
-            timeMap.push(quickSort(temp));
-            labelMap.push(element.label);
+            runTime = quickSort(temp)
             break;
           case 6:
-            timeMap.push(threeWayQuickSort(temp));
-            labelMap.push(element.label);
+            runTime = threeWayQuickSort(temp)
             break;
           case 7:
-            timeMap.push(mergeSort(temp).time);
-            labelMap.push(element.label);
+            runTime = mergeSort(temp).time
             break;
           default:
             bubbleSort(list);
         }
+
+        timeMap.push(runTime);
+        labelMap.push(element.label);
       })
       
-      console.log(timeMap);
       threeWayQuickSort(list);
       setIsSorted(true);
     }
@@ -193,7 +198,7 @@ const Compare = () => {
               <Select 
                 options = {algorithms}
                 onChange={handleAlgoChange}
-                placeholder = {algorithms[0].label}
+                //placeholder = {'Select Algorithms to compare'}
                 styles={colourStyles}
                 isMulti
               />
@@ -209,20 +214,24 @@ const Compare = () => {
           </Row>
         </div>
 
-        {isSorted && <ResponsiveChartContainer 
-          xAxis={[{scaleType: 'band',data: labelMap, id:'x-axis-id' }]}
-          yAxis={[{data: timeMap, id:'y-axis-id'}]}
-          series = {[{type:'bar',data: timeMap}]}
+        {isSorted && 
+        <BarChart
+          xAxis ={[{scaleType: 'band', data: labelMap}]}
+          series={[{data: timeMap}]}
           height={300}
+        />}
+
+        <ResponsiveChartContainer
+          xAxis={[{scaleType:'band',data: list.map((num,index) => {return index}), id:'x-axis-id'}]}
+          yAxis={[{data: list, id: 'y-axis-id'}]}
+          series = {[{type: 'bar', data: list}]}
         >
           <BarPlot />
-          <ChartsXAxis label="Algorithms" position="bottom" axisId="x-axis-id" />
-          <ChartsYAxis label="Run Time" axisId="y-axis-id" />
-        </ResponsiveChartContainer>}
-
-        <BarChart
+          <ChartsXAxis label='List' position='bottom' axisId='x-axis-id' />
+        </ResponsiveChartContainer>
+        {/* <BarChart
           series = {[{data: list}]} 
-        />
+        /> */}
       </Container>
     )
 }

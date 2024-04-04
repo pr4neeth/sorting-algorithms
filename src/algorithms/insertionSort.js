@@ -1,8 +1,10 @@
+let start = 0;
+
 const insertionSort = (list) => {
 
+    start = 0;
+    
     const len = list.length;
-
-    const start = performance.now();
 
     let curr;
     let i,j;
@@ -11,17 +13,22 @@ const insertionSort = (list) => {
     {
         curr = list[i];
 
-        for(j = i-1; j >= 0 && list[j] > curr ; j--)
+        for(j = i-1; j >= 0  ; j--)
         {
-            list[j+1] = list[j];
+            start++;
+            if(list[j] > curr){
+                list[j+1] = list[j];
+            }
+            else{
+                break;
+            }
         }
 
         list[j+1] = curr;
     }
 
-    const end = performance.now();
 
-    return end - start;
+    return start;
     
 }
 

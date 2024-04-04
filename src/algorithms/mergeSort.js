@@ -1,3 +1,5 @@
+let start = 0;
+
 const merge = (a, b) => {
     let c = [];
 
@@ -10,14 +12,17 @@ const merge = (a, b) => {
         else{
             c[k++] = a[i++];
         }
+        start++;
     }
 
     while(i<a.length){
         c[k++] = a[i++];
+        start++;
     }
 
     while(j<b.length){
         c[k++] = b[j++];
+        start++;
     }
 
     return c;
@@ -25,14 +30,13 @@ const merge = (a, b) => {
 
 const mergeSort = (list) => {
 
-    const start = performance.now();
+    start = 0;
 
     const result = sort(list);
 
-    const end = performance.now();
 
     return {
-        time: end - start,
+        time: start,
         sortedList: result
     }
     

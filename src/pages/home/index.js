@@ -21,6 +21,7 @@ const Home = () => {
     const [isSorted, setIsSorted] = useState(false);
     const [algo, setAlgo] = useState(1);
     const [size, setSize] = useState(200);
+    const [runTime, setRunTime] = useState(0);
   
     const algorithms = [
       {value: 1, label: 'Bubble Sort'},
@@ -51,32 +52,36 @@ const Home = () => {
     }, [])
   
     const sort = () => {
-      if(isSorted)
+      if(isSorted){
+        alert('Array is already sorted');
         return;
+      }
       switch(algo) {
         case 1:
-          bubbleSort(list);
+          setRunTime(bubbleSort(list));
           break;
         case 2:
-          insertionSort(list);
+          setRunTime(insertionSort(list));
           break;
         case 3:
-          selectionSort(list);
+          setRunTime(selectionSort(list));
           break;
         case 4:
-          heapSort(list);
+          setRunTime(heapSort(list));
           break;
         case 5:
-          quickSort(list);
+          setRunTime(quickSort(list));
           break;
         case 6:
-          threeWayQuickSort(list);
+          setRunTime(threeWayQuickSort(list));
           break;
         case 7:
-          setList(mergeSort(list).sortedList);
+          const result = mergeSort(list);
+          setList(result.sortedList);
+          setRunTime(result.time)
           break;
         default:
-          bubbleSort(list);
+          setRunTime(bubbleSort(list));
       }
       setIsSorted(true);
     }
@@ -144,6 +149,14 @@ const Home = () => {
               >
                 Sort the array
               </Button>
+            </Col>
+          </Row>
+          <br />
+          <Row style={{textAlign:'center'}}>
+            <Col>
+                {isSorted && <p>The {algorithms.map(obj => {
+                  if(obj.value === algo) return obj.label
+                })} algorithm took {runTime} iterations to sort the array</p>}
             </Col>
           </Row>
         </div>

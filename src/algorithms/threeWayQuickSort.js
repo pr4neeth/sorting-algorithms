@@ -1,11 +1,12 @@
 import swap from "../helpers/swap";
 
-const threeWayQuickSort = (list) => {
-    const start = performance.now();
-    sort(list, 0, list.length - 1);
-    const end = performance.now();
+let start = 0;
 
-    return end - start;
+const threeWayQuickSort = (list) => {
+    start = 0;
+    sort(list, 0, list.length - 1);
+
+    return start;
 }
 
 const sort = (list, left , right) => {
@@ -46,6 +47,7 @@ const partition = (list, left, right, pivotIndex) => {
         swap(list, i, storeIndex);
         storeIndex++;
       }
+      start++;
     }
   
     swap(list, storeIndex, right);

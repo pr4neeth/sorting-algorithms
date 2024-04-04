@@ -1,11 +1,13 @@
 import swap from "../helpers/swap";
 
+let start = 0;
+
 const selectionSort = (list) => {
 
+    start = 0;
+
     const len = list.length;
-
-    const start = performance.now();
-
+    
     let i,j,min;
     
     for(i = 0; i<len ; i++)
@@ -17,6 +19,7 @@ const selectionSort = (list) => {
             if(list[j] < list[min]){
                 min = j;
             }
+            start++;
         }
 
         if(i !== min)
@@ -25,9 +28,8 @@ const selectionSort = (list) => {
         }
     }
 
-    const end = performance.now();
 
-    return end - start;
+    return start;
 
 }
 
