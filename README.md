@@ -1,4 +1,4 @@
-# sorting-algorithms
+# Sorting-algorithms
 A UI to visualize sorting algorithms using react
 
 # Implementation Details
