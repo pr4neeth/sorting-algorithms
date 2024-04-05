@@ -121,6 +121,11 @@ const Compare = () => {
     }
   
     const regenerate = () => {
+      if(size > 1000)
+      {
+        alert("Please enter a number less than 1000");
+        return;
+      }
       switch(arrayType) {
         case 1:
           setList(randomArray(size))

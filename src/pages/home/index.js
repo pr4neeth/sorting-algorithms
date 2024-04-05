@@ -87,6 +87,11 @@ const Home = () => {
     }
   
     const regenerate = () => {
+      if(size > 1000)
+      {
+        alert("Please enter a number less than 1000");
+        return;
+      }
       setList(randomArray(size));
       setIsSorted(false);
     }
@@ -95,7 +100,6 @@ const Home = () => {
       setAlgo(event.value);
     } 
     const handleSizeChange = (event) => {
-      console.log(event);
       setSize(event.target.value)
     }
 
