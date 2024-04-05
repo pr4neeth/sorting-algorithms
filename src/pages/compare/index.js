@@ -144,8 +144,6 @@ const Compare = () => {
   
     const handleAlgoChange = (event) => {
       setAlgo(event);
-      setTimeMap([]);
-      setLabelMap([]);
     } 
     const handleSizeChange = (event) => {
       setSize(event.target.value)
