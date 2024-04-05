@@ -166,7 +166,7 @@ const Compare = () => {
             <Col>
               <TextField
                 onChange={handleSizeChange}
-                placeholder='Provide the array size (200)'
+                placeholder='Provide the array size(200)'
                 inputProps={{
                   style:{
                     color: "#000",
