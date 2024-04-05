@@ -17,7 +17,7 @@ function App() {
       <br/>
       <div style={{justifyContent:'right', display:'flex'}}>
         <Button
-          variant="outlined"
+          variant="contained"
           onClick={handleClick}
         >
           {isSingle ? <>Compare run time</> : <>Visualise single algorithm</>} 

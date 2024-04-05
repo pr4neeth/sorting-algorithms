@@ -102,16 +102,16 @@ const Home = () => {
     return (
       <Container className="Home-header">
         <div>
-          <div style={{justifyContent:'center',display:'flex'}}>
-            <h1>Select single algorithm to sort the array</h1>
+          <div style={{justifyContent:'center',display:'flex',color:'#555'}}>
+            <h1>Select an algorithm to sort the array</h1>
           </div>
           <br />
           <Row>
-            <Col>Give the array size</Col>
+            {/* <Col>Give the array size</Col> */}
             <Col>
               <TextField
                 onChange={handleSizeChange}
-                placeholder='200'
+                placeholder='Provide the array size'
                 inputProps={{
                   style:{
                     color: "#000",
@@ -133,7 +133,7 @@ const Home = () => {
           </Row>
           <br/>
           <Row>
-            <Col>Select the sorting Algorithm</Col>
+            {/* <Col>Select the sorting Algorithm</Col> */}
             <Col>
               <Select 
                 options = {algorithms}
@@ -144,7 +144,7 @@ const Home = () => {
             </Col>
             <Col>
               <Button
-                variant='outlined'
+                variant='contained'
                 onClick={sort}
               >
                 Sort the array
@@ -154,9 +154,7 @@ const Home = () => {
           <br />
           <Row style={{textAlign:'center'}}>
             <Col>
-                {isSorted && <p>The {algorithms.map(obj => {
-                  if(obj.value === algo) return obj.label
-                })} algorithm took {runTime} iterations to sort the array</p>}
+                {isSorted && <p>The selected algorithm took {runTime} iterations to sort the array</p>}
             </Col>
           </Row>
         </div>

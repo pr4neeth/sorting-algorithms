@@ -15,12 +15,12 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { BarChart, BarPlot } from '@mui/x-charts/BarChart';
 import { Button, TextField } from '@mui/material';
 import Select from 'react-select';
-import { ChartsYAxis, ResponsiveChartContainer } from '@mui/x-charts';
+import { ResponsiveChartContainer } from '@mui/x-charts';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import sortedArray from '../../helpers/sortedArray';
 import reverseSortedArray from '../../helpers/reverseSortedArray';
 import almostSortedArray from '../../helpers/almostSortedArray';
-import { Bar } from 'react-chartjs-2';
+
 
 const Compare = () => {
     const [list, setList] = useState([]);
@@ -110,9 +110,10 @@ const Compare = () => {
           default:
             bubbleSort(list);
         }
-
         timeMap.push(runTime);
         labelMap.push(element.label);
+
+        return null;
       })
       
       threeWayQuickSort(list);
@@ -143,6 +144,8 @@ const Compare = () => {
   
     const handleAlgoChange = (event) => {
       setAlgo(event);
+      setTimeMap([]);
+      setLabelMap([]);
     } 
     const handleSizeChange = (event) => {
       setSize(event.target.value)
@@ -154,16 +157,16 @@ const Compare = () => {
     return (
       <Container className="Home-header">
         <div>
-          <div style={{display:'flex', justifyContent: 'center'}}>
-            <h1>Select two or more Algorithms to compare the run time</h1>
+          <div style={{display:'flex', justifyContent: 'center',color:'#555'}}>
+            <h1>Select algorithms to sort and compare the run time</h1>
           </div>
           <br/>
           <Row>
-            <Col>Give the array size</Col>
+            {/* <Col>Give the array size</Col> */}
             <Col>
               <TextField
                 onChange={handleSizeChange}
-                placeholder='200'
+                placeholder='Give the array size'
                 inputProps={{
                   style:{
                     color: "#000",
@@ -193,19 +196,19 @@ const Compare = () => {
           </Row>
           <br/>
           <Row>
-            <Col>Select the sorting Algorithms to compare run time</Col>
+            {/* <Col>Select the sorting Algorithms to compare run time</Col> */}
             <Col>
               <Select 
                 options = {algorithms}
                 onChange={handleAlgoChange}
-                //placeholder = {'Select Algorithms to compare'}
+                placeholder = {'Select Algorithms to compare'}
                 styles={colourStyles}
                 isMulti
               />
             </Col>
             <Col>
               <Button
-                variant='outlined'
+                variant='contained'
                 onClick={sort}
               >
                 Sort and Compare
@@ -216,9 +219,10 @@ const Compare = () => {
 
         {isSorted && 
         <BarChart
-          xAxis ={[{scaleType: 'band', data: labelMap}]}
+          xAxis ={[{scaleType: 'band', data: labelMap, label: 'Algorithm'}]}
           series={[{data: timeMap}]}
           height={300}
+          width={algo.length * 150}
         />}
 
         <ResponsiveChartContainer
