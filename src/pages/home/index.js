@@ -19,9 +19,11 @@ import Select from 'react-select';
 const Home = () => {
     const [list, setList] = useState([]);
     const [isSorted, setIsSorted] = useState(false);
+    const [isChanged, setIsChanged] = useState(false);
     const [algo, setAlgo] = useState(1);
     const [size, setSize] = useState(200);
     const [runTime, setRunTime] = useState(0);
+    const [iterations,setIterations] = useState(0);
   
     const algorithms = [
       {value: 1, label: 'Bubble Sort'},
@@ -56,29 +58,44 @@ const Home = () => {
         alert('Array is already sorted');
         return;
       }
+      setIsChanged(false)
+      let result;
       switch(algo) {
         case 1:
-          setRunTime(bubbleSort(list));
+          result = bubbleSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 2:
-          setRunTime(insertionSort(list));
+          result = insertionSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 3:
-          setRunTime(selectionSort(list));
+          result = selectionSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 4:
-          setRunTime(heapSort(list));
+          result = heapSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 5:
-          setRunTime(quickSort(list));
+          result = quickSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 6:
-          setRunTime(threeWayQuickSort(list));
+          result = threeWayQuickSort(list);
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         case 7:
-          const result = mergeSort(list);
+          result = mergeSort(list);
           setList(result.sortedList);
-          setRunTime(result.time)
+          setRunTime(result.time);
+          setIterations(result.iterations)
           break;
         default:
           setRunTime(bubbleSort(list));
@@ -97,6 +114,7 @@ const Home = () => {
     }
   
     const handleAlgoChange = (event) => {
+      setIsChanged(true);
       setAlgo(event.value);
     } 
     const handleSizeChange = (event) => {
@@ -158,7 +176,12 @@ const Home = () => {
           <br />
           <Row style={{textAlign:'center'}}>
             <Col>
-                {isSorted && <p>The selected algorithm took {runTime} iterations to sort the array</p>}
+                {isSorted && !isChanged && <p>The {algorithms.map(obj => {
+                  if(obj.value === algo){
+                    return obj.label
+                  }
+                  return null;
+                })} algorithm took <b>{iterations}</b> iterations and {runTime} milliseconds to sort the array</p>}
             </Col>
           </Row>
         </div>

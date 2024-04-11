@@ -1,9 +1,10 @@
 import swap from "../helpers/swap";
-let start = 0;
+let itr = 0;
 
 const bubbleSort = (list) => {
+    const start = performance.now();
 
-    start = 0;
+    itr = 0;
 
     const len = list.length;
 
@@ -20,7 +21,7 @@ const bubbleSort = (list) => {
                 swap(list, j-1, j);
                 swapped = true;
             }
-            start++;
+            itr++;
         }
 
         if(!swapped){
@@ -28,8 +29,12 @@ const bubbleSort = (list) => {
         }
     }
 
+    const end = performance.now();
 
-    return start;
+    return {
+        iterations: itr,
+        time: end-start
+    }
     
 }
 

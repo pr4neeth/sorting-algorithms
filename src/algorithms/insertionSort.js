@@ -1,8 +1,9 @@
-let start = 0;
+let itr = 0;
 
 const insertionSort = (list) => {
+    const start = performance.now();
 
-    start = 0;
+    itr = 0;
     
     const len = list.length;
 
@@ -15,7 +16,7 @@ const insertionSort = (list) => {
 
         for(j = i-1; j >= 0  ; j--)
         {
-            start++;
+            itr++;
             if(list[j] > curr){
                 list[j+1] = list[j];
             }
@@ -27,8 +28,12 @@ const insertionSort = (list) => {
         list[j+1] = curr;
     }
 
+    const end = performance.now();
 
-    return start;
+    return{
+        iterations: itr,
+        time: end - start
+    };
     
 }
 

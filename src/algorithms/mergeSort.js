@@ -1,4 +1,4 @@
-let start = 0;
+let itr = 0;
 
 const merge = (a, b) => {
     let c = [];
@@ -12,31 +12,34 @@ const merge = (a, b) => {
         else{
             c[k++] = a[i++];
         }
-        start++;
+        itr++;
     }
 
     while(i<a.length){
         c[k++] = a[i++];
-        start++;
+        itr++;
     }
 
     while(j<b.length){
         c[k++] = b[j++];
-        start++;
+        itr++;
     }
 
     return c;
 }
 
 const mergeSort = (list) => {
+    const start = performance.now();
 
-    start = 0;
+    itr = 0;
 
     const result = sort(list);
 
+    const end = performance.now();
 
     return {
-        time: start,
+        iterations: itr,
+        time: end - start,
         sortedList: result
     }
     

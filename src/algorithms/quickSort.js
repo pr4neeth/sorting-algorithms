@@ -1,12 +1,20 @@
 import swap from "../helpers/swap";
 
-let start =0
+let itr =0
 
 const quickSort = (list) => {
-    start = 0;
+    const start = performance.now();
+
+    itr = 0;
+
     sort(list, 0 , list.length - 1);
 
-    return start;
+    const end = performance.now();
+
+    return{
+        iterations: itr,
+        time: end - start
+    };
 }
 
 const sort = (list, low, high) => { 
@@ -28,7 +36,7 @@ const partition = (list, low, high) => {
             swap(list, i, j);  
             i++;
         } 
-        start++;
+        itr++;
     } 
 
     swap(list, i, high);  

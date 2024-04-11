@@ -87,25 +87,25 @@ const Compare = () => {
         console.log(temp)
         switch(element.value) {
           case 1:
-            runTime = bubbleSort(temp);
+            runTime = bubbleSort(temp).iterations;
             break;
           case 2:
-            runTime = insertionSort(temp);
+            runTime = insertionSort(temp).iterations;
             break;
           case 3:
-            runTime = selectionSort(temp)
+            runTime = selectionSort(temp).iterations;
             break;
           case 4:
-            runTime = heapSort(temp)
+            runTime = heapSort(temp).iterations;
             break;
           case 5:
-            runTime = quickSort(temp)
+            runTime = quickSort(temp).iterations;
             break;
           case 6:
-            runTime = threeWayQuickSort(temp)
+            runTime = threeWayQuickSort(temp).iterations;
             break;
           case 7:
-            runTime = mergeSort(temp).time
+            runTime = mergeSort(temp).iterations;
             break;
           default:
             bubbleSort(list);

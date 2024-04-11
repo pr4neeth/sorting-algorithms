@@ -1,10 +1,12 @@
 import swap from "../helpers/swap";
-let start = 0;
+let itr = 0;
 
 const heapSort = (list) => {
-    const len = list.length;
+    const start = performance.now();
 
-    start = 0;
+    itr = 0;
+
+    const len = list.length;
 
     for (let i = Math.floor(len / 2) - 1; i >= 0; i--){
         heapify(list, len, i);
@@ -16,8 +18,12 @@ const heapSort = (list) => {
         heapify(list, i, 0);
     }
 
+    const end = performance.now();
 
-    return start;
+    return{
+        iterations: itr,
+        time: end - start
+    };
 }
 
 const heapify = (list, len, i) => {
@@ -25,7 +31,7 @@ const heapify = (list, len, i) => {
     let l = 2 * i + 1;
     let r = 2 * i + 2;
 
-    start++;
+    itr++;
 
     if (l < len && list[l] > list[largest])
         largest = l;
