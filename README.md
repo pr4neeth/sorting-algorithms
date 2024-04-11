@@ -19,7 +19,8 @@ The user interface was developed using React, a JavaScript library for building 
 **Almost sorted array:** The generated array contains most of the elements in ascending order except for few elements
 
 # Run Time calculation
-The runtime of each sorting algorithm was calculated by counting the number of iterations it takes for the algorithm to sort the array. This provides a measure of the algorithm's efficiency in terms of the number of comparisons and swaps it performs.
+The runtime of each sorting algorithm was calculated by counting the number of iterations it takes for the algorithm to sort the array. This provides a measure of the algorithm's efficiency in terms of the number of comparisons and swaps it performs. The absolute time taken is calculated by using the performance.now() function in javaScript which returns the current time and time is calculated by calculating the difference between the returned times before the start and after the end of the algorithm.
+
 
 ![Screenshot 2024-04-05 162637](https://github.com/pr4neeth/sorting-algorithms/assets/107405613/09d3dfdd-e6c9-4af1-b2aa-3cb5def1bbb5)
 
